@@ -19,7 +19,7 @@ public class CityGame {
 		System.out.println("\"" + GAME_NAME + "\""+ " has been started...");
 		
 		ComputerPlayer player = new ComputerPlayer(namePlayer);
-		List<String> cities = new InputCities().readCities("path"); // TODO !!! write path to file
+		List<String> cities = new InputCities().readCities(); 
 		player.setListCities(cities);
 		
 		String userName = getUserInput ("Enter your name");
@@ -120,6 +120,8 @@ public class CityGame {
     	
     	return false;
     }
+    
+    // Для САШИ  -  new InputCities().readCities() is ready ( returns List<String> )  
     
     	
     /**

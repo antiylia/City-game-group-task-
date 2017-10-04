@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		String nameComputerPlayer = "Bob-bot";
-		
+
 		CityGame game = new CityGame();
 		Player winner = game.play(nameComputerPlayer);
 		System.out.println("The winner is " + winner);
