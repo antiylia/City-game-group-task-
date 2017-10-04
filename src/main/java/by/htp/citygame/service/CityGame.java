@@ -16,7 +16,8 @@ public class CityGame {
 	private ComputerPlayer player;
 	
 	// САША - I've moved the list from the "play" method to get possibility using it in the "isCityUsed" method
-	private List<String> reestrAnswers = new ArrayList<String>();  // MARK: ABOUT VALIDATION!!!
+	// ЮЛЯ - It's much more suitable
+	private List<String> reestrAnswers = new ArrayList<String>();  
 		
     public Player play (String namePlayer) {
 		System.out.println("\"" + GAME_NAME + "\""+ " has been started...");
@@ -31,71 +32,87 @@ public class CityGame {
 	
 		System.out.println(player.getName() + " plays against " + user.getName() + "\n");
 				
-		String currentCity = " ";
+		String currentCity = "I don't know suitable city";
 		char letter = ' ';
+		
 	if (isComputerFirst ()) {
 		
 			System.out.println(player.getName() + " says first city");
 			letter = getRandomChar(); 
-			
-			currentCity = getCityByLetter(player, letter);
-			reestrAnswers.add(currentCity); // MARK: ABOUT VALIDATION!!!
+			currentCity = getCityByLetter(player, letter);				
+			reestrAnswers.add(currentCity); 
 			System.out.println(player.getName() + " : " + currentCity);
 			
 		while (!currentCity.equals("I don't know suitable city")) {	
 			letter = getlastLetter (currentCity);
 			
 			currentCity = getUserInput("Enter city, which starts with " + letter);
-			// HERE How to organise test if city named firstly? 
-			// TODO!!!
+			if (isCityUsed(currentCity)|| currentCity.equals("0") ) {
+				currentCity = "I don't know suitable city";
+			}		
+			
 			System.out.println(user.getName() + " : " + currentCity);
 			if (currentCity.equalsIgnoreCase("I don't know suitable city")) {
 				return player;
 			  }
-			reestrAnswers.add(currentCity); // MARK: ABOUT VALIDATION!!!
+			reestrAnswers.add(currentCity); 
 			
 			
 			letter = getlastLetter (currentCity);
 			currentCity = getCityByLetter(player, letter);
+			
+			if (isCityUsed(currentCity)|| currentCity.equals("0") ) {
+				currentCity = "I don't know suitable city";
+			}
+			
 			System.out.println(player.getName() + " : " + currentCity);
 			
 			if (currentCity.equalsIgnoreCase("I don't know suitable city")) {
 				return user;
 			  }			
-			 reestrAnswers.add(currentCity); // MARK: ABOUT VALIDATION!!!
+			 reestrAnswers.add(currentCity); 
 		  }
 		return user;
+		
 	} else {
 		
 			System.out.println(user.getName() + " says first city");
 			currentCity = getUserInput("Enter first city");
-			reestrAnswers.add(currentCity); // MARK: ABOUT VALIDATION!!!
+			reestrAnswers.add(currentCity); 
 			System.out.println(user.getName() + " : " + currentCity);
 			
 			while (!currentCity.equals("I don't know suitable city")) {	
 				
 				letter = getlastLetter (currentCity);				
 				currentCity = getCityByLetter(player, letter);
+				
+			  if (isCityUsed(currentCity)|| currentCity.equals("0") ) {
+					currentCity = "I don't know suitable city";
+				}
+				
 				System.out.println(player.getName() + " : " + currentCity);
 				if (currentCity.equalsIgnoreCase("I don't know suitable city")) {
 					return user;
-				  }				
-				reestrAnswers.add(currentCity); // MARK: ABOUT VALIDATION!!!
+				  }
+				reestrAnswers.add(currentCity); 
 				
 				letter = getlastLetter (currentCity);
 				currentCity = getUserInput("Enter city, which starts with " + letter);
+				
+			  if (isCityUsed(currentCity)|| currentCity.equals("0") ) {
+					currentCity = "I don't know suitable city";
+				}
+				  
 				System.out.println(user.getName() + " : " + currentCity);
 				if (currentCity.equalsIgnoreCase("I don't know suitable city")) {
 					return player;
 				  }
-				reestrAnswers.add(currentCity); // MARK: ABOUT VALIDATION!!!
+				reestrAnswers.add(currentCity); 
 										
 			  }
 			return player;
 		}		
-	}
-	
-    
+	}    
     
     private char getlastLetter (String city) {
         return city.charAt(city.length()-1);    
@@ -103,26 +120,13 @@ public class CityGame {
     
    /** 
     * Utility method, which returns city by first letter
-    * + VALIDATION if the city is occured for the first time    
+    * + VALIDATION if the city occurs for the first time    
     * 
     * MARK: ABOUT VALIDATION!!! - Саша, look, it is necessary also to check user's answer on first-occuring.
     * it seems to me, that is better to have common List<String> in method play() for registrating all answers 
    */ 
    // САША - Done 
-    private String getCityByLetter(ComputerPlayer p, char l) {
-<<<<<<< HEAD
-    	
-    	player.getListCities();
-      return "Minsk";
-      }
-    
-   // TODO САША 
-    private boolean isCityUsed(String city, List<String> cities) {
-    	
-    	
-    	return false;
-    }
-=======
+    private String getCityByLetter(ComputerPlayer p, char l) {    	
     	String city = "";
     	char letter;
     	List<String> knownCities = new ArrayList<String>();
@@ -162,12 +166,10 @@ public class CityGame {
 		}
 		return false;
 	}
->>>>>>> 443f1ed6c69c48acc11a7286fa00d7b6e0f50644
     
     // Для САШИ  -  new InputCities().readCities() is ready ( returns List<String> )  
     // Okay. I used the getter from the ComputerPlayer class
-    
-    	
+        	
     /**
      * Utility method, which randomly returns some char.
      * Is is necessary when Player is defining first city 
@@ -198,8 +200,7 @@ public class CityGame {
     	
       return true;
     }
-    
-    
+        
     
     /**
 	 * Utility method, which return String - as a result of User's input
@@ -220,11 +221,9 @@ public class CityGame {
 			}
 		}
 		return userInputLine;
-	}
-        
-    
-    
+	}         
     
 }
-    
    
+
+
