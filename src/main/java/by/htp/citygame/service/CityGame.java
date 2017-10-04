@@ -13,12 +13,13 @@ import by.htp.citygame.entity.User;
 public class CityGame {
 	
 	private static final String GAME_NAME = "City game with two players";
+	private ComputerPlayer player;
 	
 		
     public Player play (String namePlayer) {
 		System.out.println("\"" + GAME_NAME + "\""+ " has been started...");
 		
-		ComputerPlayer player = new ComputerPlayer(namePlayer);
+		player = new ComputerPlayer(namePlayer);
 		List<String> cities = new InputCities().readCities(); 
 		player.setListCities(cities);
 		
@@ -110,12 +111,12 @@ public class CityGame {
    // TODO САША 
     private String getCityByLetter(ComputerPlayer p, char l) {
     	
-    	
+    	player.getListCities();
       return "Minsk";
       }
     
    // TODO САША 
-    static boolean isCityUsed(String city) {
+    private boolean isCityUsed(String city, List<String> cities) {
     	
     	
     	return false;
