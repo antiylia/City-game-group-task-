@@ -16,8 +16,8 @@ public class CityGame {
 	private ComputerPlayer player;
 	private User user;
 
-	// РЎРђРЁРђ - I've moved the list from the "play" method to get possibility using it in the "isCityUsed" method
-	// Р®Р›РЇ - It's much more suitable ;)
+	//I've moved the list from the "play" method to get possibility using it in the "isCityUsed" method
+	// It's much more suitable ;)
 	private List<String> reestrAnswers = new ArrayList<String>();
 
 	
@@ -58,7 +58,7 @@ public class CityGame {
 			letter = getlastLetter(currentCity);
 
 			currentCity = getUserInput("Enter city, which starts with " + letter);
-			boolean testRussianWords = currentCity.matches("[Рђ-РЇР°-СЏ0-9]+");
+			boolean testRussianWords = currentCity.matches("[А-Яа-я0-9]+");
 
 			if (isCityUsed(currentCity) || testRussianWords) {
 				currentCity = "I don't know suitable city";
@@ -94,7 +94,7 @@ public class CityGame {
 		System.out.println(user.getName() + " says first city");
 		currentCity = getUserInput("Enter first city");
 		
-		boolean testRussianWords = currentCity.matches("[Рђ-РЇР°-СЏ0-9]+");
+		boolean testRussianWords = currentCity.matches("[А-Яа-я0-9]+");
 		if (testRussianWords) {
 			System.out.println("User lost...");
 			return player;
@@ -120,7 +120,7 @@ public class CityGame {
 
 			letter = getlastLetter(currentCity);
 			currentCity = getUserInput("Enter city, which starts with " + letter);
-			testRussianWords = currentCity.matches("[Рђ-РЇР°-СЏ0-9]+");
+			testRussianWords = currentCity.matches("[А-Яа-я0-9]+");
 
 			if (isCityUsed(currentCity) || testRussianWords) {
 				currentCity = "I don't know suitable city";
@@ -149,7 +149,7 @@ public class CityGame {
 	 * answer on first-occuring. it seems to me, that is better to have common
 	 * List<String> in method play() for registrating all answers
 	 */
-	// РЎРђРЁРђ - Done
+	//  - Done
 	private String getCityByLetter(ComputerPlayer p, char l) {
 		String city = "";
 		char letter;
@@ -172,7 +172,7 @@ public class CityGame {
 		}
 	}
 
-	// РЎРђРЁРђ - I've added this utility method in order to use random in the getCityByLetter method
+	//  - I've added this utility method in order to use random in the getCityByLetter method
 	private String getRandomCity(List<String> list) {
 		String city = "";
 		int i = (int) new Random().nextInt(list.size());
@@ -180,7 +180,7 @@ public class CityGame {
 		return city;
 	}
 
-	// РЎРђРЁРђ - Done
+	//  - Done
 	private boolean isCityUsed(String city) {
 		String c = "";
 		for (int i = 0; i < reestrAnswers.size(); i++) {
@@ -191,7 +191,7 @@ public class CityGame {
 		return false;
 	}
 
-	// Р”Р»СЏ РЎРђРЁР� - new InputCities().readCities() is ready ( returns List<String> )
+	// new InputCities().readCities() is ready ( returns List<String> )
 	// Okay. I used the getter from the ComputerPlayer class
 
 	/**
