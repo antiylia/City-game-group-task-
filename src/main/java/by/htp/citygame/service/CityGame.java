@@ -14,7 +14,8 @@ public class CityGame {
 	
 	private static final String GAME_NAME = "City game with two players";
 	
-		
+	// Example for practising merging (Ylia)
+ 		
     public Player play (String namePlayer) {
 		System.out.println("\"" + GAME_NAME + "\""+ " has been started...");
 		
