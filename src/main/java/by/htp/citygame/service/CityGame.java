@@ -14,6 +14,8 @@ public class CityGame {
 	
 	private static final String GAME_NAME = "City game with two players";
 	
+	// САША - I've moved the list from the "play" method to get possibility using it in the "isCityUsed" method
+	private List<String> reestrAnswers = new ArrayList<String>();  // MARK: ABOUT VALIDATION!!!
 		
     public Player play (String namePlayer) {
 		System.out.println("\"" + GAME_NAME + "\""+ " has been started...");
@@ -27,9 +29,7 @@ public class CityGame {
 		user.setName(userName);
 	
 		System.out.println(player.getName() + " plays against " + user.getName() + "\n");
-		
-		List<String> reestrAnswers = new ArrayList<String>(); // MARK: ABOUT VALIDATION!!!
-		
+				
 		String currentCity = " ";
 		char letter = ' ';
 	if (isComputerFirst ()) {
@@ -107,21 +107,50 @@ public class CityGame {
     * MARK: ABOUT VALIDATION!!! - Саша, look, it is necessary also to check user's answer on first-occuring.
     * it seems to me, that is better to have common List<String> in method play() for registrating all answers 
    */ 
-   // TODO САША 
+   // САША - Done 
     private String getCityByLetter(ComputerPlayer p, char l) {
-    	
-    	
-      return "Minsk";
-      }
+    	String city = "";
+    	char letter;
+    	List<String> knownCities = new ArrayList<String>();
+		knownCities = p.getListCities();
+		List<String> suitedCities = new ArrayList<String>();
+		for (int i = 0; i < knownCities.size(); i++) {
+			if (!isCityUsed(knownCities.get(i))) {
+				city = (String) knownCities.get(i);
+				letter = city.charAt(0);
+				if (letter == Character.toUpperCase(l))
+					suitedCities.add(city);
+			}
+		}
+		if (suitedCities.size() == 0)
+			return "0";
+		else {
+			city = getRandomCity(suitedCities);
+			return city;
+		}
+	}
     
-   // TODO САША 
-    static boolean isCityUsed(String city) {
-    	
-    	
-    	return false;
-    }
+    // САША - I've added this utility method in order to use random in the getCityByLetter method     
+	private String getRandomCity(List<String> list) {
+    	String city = "";
+		int i = (int) new Random().nextInt(list.size());
+		city = (String) list.get(i);
+		return city;
+	}   
+   
+	// САША - Done
+    private boolean isCityUsed(String city) {
+    	String c = "";
+    	for (int i = 0; i < reestrAnswers.size(); i++) {
+			c = reestrAnswers.get(i);
+			if (city.equals(c))
+				return true;
+		}
+		return false;
+	}
     
     // Для САШИ  -  new InputCities().readCities() is ready ( returns List<String> )  
+    // Okay. I used the getter from the ComputerPlayer class
     
     	
     /**
